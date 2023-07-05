@@ -41,9 +41,9 @@ int mainMenu()
     exitText.setFont(font);
     exitText.setString("Exit");
     exitText.setCharacterSize(200);
-    exitText.setOutlineColor(Color::Black);
+    exitText.setOutlineColor(Color::White);
     exitText.setOutlineThickness(10);
-    exitText.setFillColor(sf::Color::White);
+    exitText.setFillColor(sf::Color::Black);
     exitText.setPosition(550, 500);
 
     while (window.isOpen())
