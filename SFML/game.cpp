@@ -373,16 +373,32 @@ int runGame()
 					// double button
 					else if (x >= 355 && y >= 525 && y <= 585 && x <= 585 && betPlaced == true)
 					{
-						playerTurn();
+						// Check if the bet value is within the balance
+						if (bet.betValue <= balance) {
+							playerTurn();
 
-						while (dealerCards < 17)
-						{
-							dealerTurn();
+							while (dealerCards < 17)
+							{
+								dealerTurn();
+							}
+
+							int potentialBalance = balance - bet.betValue * 2;
+							if (potentialBalance >= 0) {
+								balance = potentialBalance;
+								bet.betValue *= 2;
+							}
+							else {
+								// Adjust the bet value to prevent a negative balance
+								bet.betValue = balance;
+								balance = 0;
+							}
+
+							winCondition(bet);
 						}
-						bet.betValue *= 2;
-						balance -= bet.betValue;
-
-						winCondition(bet);
+						else {
+							// Handle insufficient balance error
+							cout << "Insufficient balance for doubling the bet.\n";
+						}
 					}
 					//reload
 					if (x >= 50 && y >= 360 && x <= 100 && y <= 410 && betBarEnable == true)
